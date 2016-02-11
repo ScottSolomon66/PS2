@@ -1,7 +1,12 @@
 ##Problem Set 2
 ##By Scott Solomon
+##Applied Statistical Programming
 
 ##Yes I am starting this during the Super Bowl
+
+##benford_stat
+  ##this function will give calculate the benford statistics
+  ##it gives the option to include both, one of the statistics, or both
 
 benford_stat<-function(x, return_m=T,return_d=F){
   i=1:9
@@ -10,13 +15,16 @@ benford_stat<-function(x, return_m=T,return_d=F){
   d<-sqrt(d) #wouldn't work in one line for some reason
   
   #Determining which statistics are returned
-  if(return_m == T & return_d == T) return(list(("M" = m),("D" = d))) #returning both statistics
-  if(return_m == T & return_d == F) return(list("M" = m)) #returning just the M statistic
-  if(return_m == F & return_d == T) return(list("D" = d)) #returning just the D statistic
+  if(return_m == T & return_d == T) return(list(("M =") == m,("D =") == d)) #returning both statistics
+  if(return_m == T & return_d == F) return(list("M = " == m)) #returning just the M statistic
+  if(return_m == F & return_d == T) return(list("D = " == d)) #returning just the D statistic
   if(return_m == F & return_d == F) return("") #returning none
 }
 
-#Recreating the function without the option because it isn't needed for the table
+##test
+
+##benford_stat_no_choice
+  #Recreating the function without the option because it isn't needed for the table
 
 benford_stat_no_choice<-function(x){
   
@@ -30,6 +38,9 @@ benford_stat_no_choice<-function(x){
   return(both_stats) #returning the stats
 }
 
+##print_benford
+  ##creating a function that will create a table
+  ##the table will include both statistics, and significance levels
 
 print_benford<-function(x, write_csv = T){
   rows<-c("stat","stattype") #creating a vector for row names, need to add more still
@@ -88,6 +99,8 @@ print_benford<-function(x, write_csv = T){
   ##now to add these values to the dataframe
   table<-cbind(table, asteriks, sig_level) #combinining them by column to add new columns
   
+  ##write in a line of code in case user wants to write the csv file in the same function as the table function
+  
   if (write_csv == T){ #if the user of the function wants to write the table
     write.csv(table, file = "Benford_Stat_Table.csv") #writing the table as a csv file
   }
@@ -95,7 +108,12 @@ print_benford<-function(x, write_csv = T){
   return(table) #returning the dataframe with all of the relevant information
   
 }
-  
 
+#write_benford
+  ##writing a function if user just wants to write a csv file
+
+write_benford_csv<-function(x){
+  write.csv(table, file = "Benford_Stat_Table.csv")
+}
 
 
